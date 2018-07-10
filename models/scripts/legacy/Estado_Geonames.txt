@@ -1,0 +1,60 @@
+geonames = "";
+
+if getValue("ufNascimento")=="AC":
+    geonames = "http://www.geonames.org/3665474"
+elif getValue("ufNascimento")=="AL":
+	geonames = "http://www.geonames.org/3408096"
+elif getValue("ufNascimento")=="AP":
+	geonames = "http://www.geonames.org/3407762"
+elif getValue("ufNascimento")=="AM":
+	geonames = "http://www.geonames.org/3665361"
+elif getValue("ufNascimento")=="BA":
+	geonames = "http://www.geonames.org/3471168"
+elif getValue("ufNascimento")=="CE":
+	geonames = "http://www.geonames.org/3402362"
+elif getValue("ufNascimento")=="DF":
+	geonames = "http://www.geonames.org/3463504"
+elif getValue("ufNascimento")=="ES":
+	geonames = "http://www.geonames.org/3463930"
+elif getValue("ufNascimento")=="GO":
+	geonames = "http://www.geonames.org/3462372"
+elif getValue("ufNascimento")=="MA":
+	geonames = "http://www.geonames.org/3395443"
+elif getValue("ufNascimento")=="MT":
+	geonames = "http://www.geonames.org/3457419"
+elif getValue("ufNascimento")=="MS":
+	geonames = "http://www.geonames.org/3457415"
+elif getValue("ufNascimento")=="MG":
+	geonames = "http://www.geonames.org/3457153"
+elif getValue("ufNascimento")=="PA":
+	geonames = "http://www.geonames.org/3393129"
+elif getValue("ufNascimento")=="PB":
+	geonames = "http://www.geonames.org/3393098"
+elif getValue("ufNascimento")=="PR":
+	geonames = "http://www.geonames.org/3455077"
+elif getValue("ufNascimento")=="PE":
+	geonames = "http://www.geonames.org/3392268"
+elif getValue("ufNascimento")=="PI":
+	geonames = "http://www.geonames.org/3392213"
+elif getValue("ufNascimento")=="RJ":
+	geonames = "http://www.geonames.org/3451189"
+elif getValue("ufNascimento")=="RN":
+	geonames = "http://www.geonames.org/3390290"
+elif getValue("ufNascimento")=="RS":
+	geonames = "http://www.geonames.org/3451133"
+elif getValue("ufNascimento")=="RO":
+	geonames = "http://www.geonames.org/3924825"
+elif getValue("ufNascimento")=="RR":
+	geonames = "http://www.geonames.org/3662560"
+elif getValue("ufNascimento")=="SC":
+	geonames = "http://www.geonames.org/3450387"
+elif getValue("ufNascimento")=="SP":
+	geonames = "http://www.geonames.org/3448433"
+elif getValue("ufNascimento")=="SE":
+	geonames = "http://www.geonames.org/3447799"
+elif getValue("ufNascimento")=="TO":
+	geonames = "http://www.geonames.org/3474575"
+else:
+    geonames = ""
+return geonames
+	

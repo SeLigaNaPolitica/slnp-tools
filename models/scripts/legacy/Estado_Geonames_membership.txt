@@ -1,0 +1,60 @@
+geonames = "";
+
+if getValue("siglaUf")=="AC":
+    geonames = "http://www.geonames.org/3665474"
+elif getValue("siglaUf")=="AL":
+	geonames = "http://www.geonames.org/3408096"
+elif getValue("siglaUf")=="AP":
+	geonames = "http://www.geonames.org/3407762"
+elif getValue("siglaUf")=="AM":
+	geonames = "http://www.geonames.org/3665361"
+elif getValue("siglaUf")=="BA":
+	geonames = "http://www.geonames.org/3471168"
+elif getValue("siglaUf")=="CE":
+	geonames = "http://www.geonames.org/3402362"
+elif getValue("siglaUf")=="DF":
+	geonames = "http://www.geonames.org/3463504"
+elif getValue("siglaUf")=="ES":
+	geonames = "http://www.geonames.org/3463930"
+elif getValue("siglaUf")=="GO":
+	geonames = "http://www.geonames.org/3462372"
+elif getValue("siglaUf")=="MA":
+	geonames = "http://www.geonames.org/3395443"
+elif getValue("siglaUf")=="MT":
+	geonames = "http://www.geonames.org/3457419"
+elif getValue("siglaUf")=="MS":
+	geonames = "http://www.geonames.org/3457415"
+elif getValue("siglaUf")=="MG":
+	geonames = "http://www.geonames.org/3457153"
+elif getValue("siglaUf")=="PA":
+	geonames = "http://www.geonames.org/3393129"
+elif getValue("siglaUf")=="PB":
+	geonames = "http://www.geonames.org/3393098"
+elif getValue("siglaUf")=="PR":
+	geonames = "http://www.geonames.org/3455077"
+elif getValue("siglaUf")=="PE":
+	geonames = "http://www.geonames.org/3392268"
+elif getValue("siglaUf")=="PI":
+	geonames = "http://www.geonames.org/3392213"
+elif getValue("siglaUf")=="RJ":
+	geonames = "http://www.geonames.org/3451189"
+elif getValue("siglaUf")=="RN":
+	geonames = "http://www.geonames.org/3390290"
+elif getValue("siglaUf")=="RS":
+	geonames = "http://www.geonames.org/3451133"
+elif getValue("siglaUf")=="RO":
+	geonames = "http://www.geonames.org/3924825"
+elif getValue("siglaUf")=="RR":
+	geonames = "http://www.geonames.org/3662560"
+elif getValue("siglaUf")=="SC":
+	geonames = "http://www.geonames.org/3450387"
+elif getValue("siglaUf")=="SP":
+	geonames = "http://www.geonames.org/3448433"
+elif getValue("siglaUf")=="SE":
+	geonames = "http://www.geonames.org/3447799"
+elif getValue("siglaUf")=="TO":
+	geonames = "http://www.geonames.org/3474575"
+else:
+    geonames = ""
+return geonames
+	

@@ -1,0 +1,5 @@
+import hashlib
+id = "";
+if getValue("nome")!="" and getValue("nome")!="99":
+   id = "partido"+getValue("nome").encode('utf-8')
+return "http://www.seliganapolitica.org/resource/"+hashlib.md5(id).hexdigest()

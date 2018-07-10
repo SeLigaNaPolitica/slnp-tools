@@ -1,0 +1,1 @@
+from .uri_generators import person_uri, formaleducation_uri

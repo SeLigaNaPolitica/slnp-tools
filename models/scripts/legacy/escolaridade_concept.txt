@@ -1,0 +1,9 @@
+import hashlib
+id = "";
+if getValue("escolaridade")!="" and getValue("escolaridade")!="99":
+   id = "formacao"+getValue("escolaridade").encode('utf-8')
+    
+else:
+    return ""
+
+return "http://www.seliganapolitica.org/resource/skos/Formacao#"+hashlib.md5(id).hexdigest()

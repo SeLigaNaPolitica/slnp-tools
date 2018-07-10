@@ -1,0 +1,19 @@
+
+
+import hashlib
+
+year = "";
+if getValue("nomeCivil")=="":
+    return ""
+
+if getValue("dataNascimento")!="" and getValue("dataNascimento")!="99":
+    year = getValue("dataNascimento")
+
+splistring = getValue("nomeCivil").split()
+splistring=sorted(splistring)
+id = ""
+for x in splistring:
+   id = id + x
+id = id+","+year
+id = id.encode('utf-8');
+return "http://www.seliganapolitica.org/resource/"+hashlib.md5(id).hexdigest()
