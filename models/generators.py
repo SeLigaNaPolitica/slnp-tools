@@ -10,44 +10,31 @@ import os
 
 import pandas as pd
 
-
-MAPPING_PROV = {
-    'cam:dataFalecimento': 'http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/',
-    'cam:dataNascimento': 'http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/',
-    'cam:ideCadastro': 'http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/',
-    'cam:nomeCivil': 'http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/',
-    'cam:nomeParlamentarAtual': 'http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/',
-    'sen:CodigoParlamentar': 'http://legis.senado.leg.br/dadosabertos/senador/',
-    'sen:NomeCompletoParlamentar': 'http://legis.senado.leg.br/dadosabertos/senador/',
-    'sen:NomeParlamentar': 'http://legis.senado.leg.br/dadosabertos/senador/'
-}
-MAPPING_TYPES = {
-    'cam:dataFalecimento': 'Property',
-    'cam:dataNascimento': 'Property',
-    'cam:ideCadastro': 'Identity',
-    'cam:nomeCivil': 'Property',
-    'cam:nomeParlamentarAtual': 'Property',
-    'sen:CodigoParlamentar': 'Identity',
-    'sen:NomeCompletoParlamentar': 'Property',
-    'sen:NomeParlamentar': 'Property',
-}
-
-MAPPING_PROV = {
-    'cam': 'http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/',
-    'sen': 'http://legis.senado.leg.br/dadosabertos/senador/',
-    'slnp': 'http://www.seliganapolitica.org/'
-}
-
-MAPPING_LABELS = {
-    'cam': 'Camara do Deputados',
-    'sen': 'Senado',
-    'slnp': 'Se Liga na Politica'
-}
-
 DATETIME_MASK = '%m-%d-%Y %H:%M'
 DATE_MASK = '%m-%d-%Y'
 BASE_URI = 'http://www.seliganapolitica.org/resource/'
 DESCRIPTION_URI = 'https://github.com/SeLigaNaPolitica/slnp-tools/tree/develop/models/generators.py'
+CONGRESSMAN_DESCRIPTION_URI = 'http://www2.camara.leg.br/transparencia/dados-abertos/dados-abertos-legislativo/webservices/deputados/obterDetalhesDeputado'
+SENATOR_DESCRIPTION_URI = 'https://www25.senado.leg.br/web/senadores'
+
+
+MAPPING_META = {
+    'cam:dataFalecimento': {'label': 'Data de falecimento', 'functional': False, 'description': None, 'description_uri': CONGRESSMAN_DESCRIPTION_URI},
+    'cam:dataNascimento': {'label': 'Data de nascimento', 'functional': False, 'description': None, 'description_uri': CONGRESSMAN_DESCRIPTION_URI},
+    'cam:ideCadastro': {'label': 'id', 'functional': True, 'description': None, 'description_uri': CONGRESSMAN_DESCRIPTION_URI},
+    'cam:nomeCivil': {'label': 'Nome completo', 'functional': False, 'description': None, 'description_uri': CONGRESSMAN_DESCRIPTION_URI},
+    'cam:nomeParlamentarAtual': {'label': 'Apelido', 'functional': False, 'description': None, 'description_uri': CONGRESSMAN_DESCRIPTION_URI},
+    'sen:CodigoParlamentar': {'label': 'id', 'functional': True, 'description': None, 'description_uri': SENATOR_DESCRIPTION_URI},
+    'sen:NomeCompletoParlamentar': {'label': 'Apelido', 'functional': False, 'description': None, 'description_uri': SENATOR_DESCRIPTION_URI},
+    'sen:NomeParlamentar': {'label': 'Nome completo', 'functional': False, 'description': None, 'description_uri': SENATOR_DESCRIPTION_URI},
+}
+
+MAPPING_PROV = {
+    'cam': 'http://www2.camara.leg.br/transparencia/dados-abertos/dados-abertos-legislativo/webservices/deputados/obterDetalhesDeputado',
+    'sen': 'https://www25.senado.leg.br/web/senadores',
+    'slnp': 'http://www.seliganapolitica.org/'
+}
+
 
 
 class PersonGenerator(object):
@@ -110,7 +97,7 @@ class PersonGenerator(object):
                         'prov_id': this_prov
                     })
 
-            data_dict['person'].append(person_list) 
+            data_dict['person'].append(person_list)
 
         data_dict['prov'].append({
             '_id': this_prov,
@@ -119,17 +106,12 @@ class PersonGenerator(object):
             'description_uri': DESCRIPTION_URI
         })
 
-        # Solve provenance list
-        for key_, value_ in MAPPING_PROV.items():
-            prov_, name_ = label_.split(':')
+        # Solve property
+        for property_key_, property_dict_ in MAPPING_META.items():
+            prov_, name_ = property_key_.split(':')
             if prov_ in prov_set:
-                data_dict['property'].append({
-                    '_id': name_,
-                    'label': MAPPING_LABELS[prov_],
-                    'functional': value_ == 'Identity'
-                    'description': datetime.utcnow().strftime(DATE_MASK),
-                    'description_uri': DESCRIPTION_URI
-                })
+                property_dict_['_id'] = name_
+                data_dict['property'].append(property_dict_)
 
         info_dict = {
             'type': 'PersonIdentity',
@@ -142,81 +124,6 @@ class PersonGenerator(object):
         output_dict['data'] = data_dict
         with open(target_path, mode='w') as f:
             json.dump(output_dict, f)
-
-# def make_agents_json(filename='identities', sample_size=None):
-#     '''Generates the identities 
-    
-#     [description]
-    
-#     Keyword Arguments:
-#         filename {str} -- target file name (default: {'identities'})
-#         sample_size {[type]} -- if provided will perform a sample over (default: {None})
-    
-#     Raises:
-#         ValueError -- [description]
-#     '''
-
-#     target_path = 'datasets/slp/{:}.json'.format(filename)
-#     # Solve agents
-#     resource_list = [] 
-#     prov_set = {'slnp'}
-#     for slnp_uri, columns_dict in agents_dict.items():
-#         resource_dict = defaultdict(list)
-#         resource_dict['Identity'].append({
-#             'hasName': 'resource_uri',
-#             'hasValue': 'http://www.seliganapolitica.org/resource/{:}'.format(slnp_uri),
-#             'hasProv': 'slnp'
-#         })
-
-#         for label_, value_ in columns_dict.items():
-#             # if isinstance(value_, str) or not isnan(value_):
-#             if not value_ == 'N/A':
-#                 prov_, name_ = label_.split(':')
-#                 prov_set = prov_set.union({prov_})
-#                 if MAPPING_TYPES[label_] in ('Property',):
-#                     resource_dict['Property'].append({
-#                         'hasName': name_,
-#                         'hasValue': value_,
-#                         'hasProv': prov_
-#                     })
-#                 elif MAPPING_TYPES[label_] in ('Identity',):
-#                     resource_dict['Identity'].append({
-#                         'hasName': name_,
-#                         'hasValue': value_,
-#                         'hasProv': prov_
-#                     })
-#                 else:
-#                     raise ValueError('only Identity and Property types mapped')
-
-
-#         resource_list.append(resource_dict)
-
-#     # Solve provenance list
-#     prov_list = []
-#     for key_, value_ in MAPPING_PROV.items():
-#         if key_ in prov_set:
-#             prov_list.append({
-#                 'hasId': key_,
-#                 'hasPublisher': value_,
-#                 'datePub': datetime.utcnow().strftime(DATE_MASK),
-#             })
-
-#     data_dict = {}
-#     data_dict['Resource'] = resource_list
-#     data_dict['Prov'] = prov_list
-
-#     info_dict = {
-#         'hasType': 'Identity',
-#         'timstampPub': datetime.utcnow().strftime(DATETIME_MASK),
-#         'hasVersion': '0.0.1'
-#     }
-
-#     output_dict = {}
-#     output_dict['Info'] = info_dict
-#     output_dict['Data'] = data_dict
-#     with open(target_path, mode='w') as f:
-#         json.dump(output_dict, f)
-
 
 if __name__ == '__main__':
     pgen = PersonGenerator()
