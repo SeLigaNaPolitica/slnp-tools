@@ -23,10 +23,7 @@ import re
 import glob
 import pandas as pd
 import json
-import sys
 import errno
-
-from numpy import nan
 
 from scripts import person_uri, formaleducation_uri
 from uuid import uuid4
@@ -283,14 +280,111 @@ def make_party_mapping_dict():
             party_mapping_dict[dict_['sigla']] = (dict_['uri'], rec_.index[0])
     return party_mapping_dict
 
-def make_post_camara_mapping_dict():
-    pass
 
-def make_post_camara_mapping_dict():
-    pass
+class XMLMigrator(object):
+    def __init__(self):
+        pass
 
-def make_post_membership_party_mapping_dict():
-    pass
+    def migrate(self, source_dir, target_dir):
+        glob_regex = '{:}/*.xml'.format(source_dir)
+        xmlfiles = glob.glob()
+        d = get_mapper()
+
+        for xmlfile in xmlfiles:
+            filename = xmlfile.split('/')[-1]
+            print('processing .. {:}'.format(filename))
+
+            with open(xmlfile, mode='r') as f:
+                voteventstr = f.read()
+            f.close()
+
+            for oldidx, newidx in d.items():
+                voteventstr = voteventstr.replace(oldidx, newidx)
+
+            file_path = '{:}{:}'.format(target_dir, filename)
+            if not os.path.exists(os.path.dirname(file_path)):
+                try:
+                    os.makedirs(os.path.dirname(file_path))
+                except OSError as exc:  # Guard against race condition
+                    if exc.errno != errno.EEXIST:
+                        raise
+            with open(file_path, mode='w') as f:
+                f.write(voteventstr)
+            f.close()
+            print('saved at ', file_path)
+
+
+# def get_deputies(deprecated=False):
+#     '''
+#         Extracts deputies from agents.csv
+
+#         args
+#         returns:
+#             dict<str, str>: keys in cam:ideCadastro and values are de uris
+#     '''
+#     if deprecated:
+#         df = pd.read_csv('person_resource_uri.csv', sep=';', header=0,
+#                          index_col='ideCadastro', encoding='utf-8')
+#         idx2url = df['resource_uri'].to_dict()
+#         return idx2url
+#     else:
+#         df = pd.read_csv('../slp/agents.csv', sep=';', header=0,
+#                          index_col='slnp:resource_uri', encoding='utf-8')
+#         df = df[df['cam:ideCadastro'].notnull()]
+
+#         uri2idx = df['cam:ideCadastro'].to_dict()
+#         idx2uri = {int(idx): uri
+#                    for uri, idx in uri2idx.items()}
+
+#         return idx2uri
+
+
+# def get_mapper():
+#     '''
+#         Extracts deputies from person_resources_uri.csv
+
+#         args
+#         returns:
+#             dict<str, str>: keys in cam:ideCadastro and values are de uris
+#     '''
+#     dfrom = get_deputies(deprecated=True)
+#     dto = get_deputies(deprecated=False)
+
+#     return {_uri: dto[_idx] for _idx, _uri in dfrom.items()}
+
+
+# def main():
+#     xmlfiles = glob.glob('vote_events/*.xml')
+#     d = get_mapper()
+
+#     for xmlfile in xmlfiles:
+#         filename = xmlfile.split('/')[-1]
+#         print('processing .. {:}'.format(filename))
+
+#         with open(xmlfile, mode='r') as f:
+#             voteventstr = f.read()
+#         f.close()
+
+#         for oldidx, newidx in d.items():
+#             voteventstr = voteventstr.replace(oldidx, newidx)
+
+#         *dirs, filename = xmlfile.split('/')
+#         file_path = '../slp/{:}/{:}'.format('/'.join(dirs), filename)
+#         if not os.path.exists(os.path.dirname(file_path)):
+#             try:
+#                 os.makedirs(os.path.dirname(file_path))
+#             except OSError as exc:  # Guard against race condition
+#                 if exc.errno != errno.EEXIST:
+#                     raise
+#         with open(file_path, mode='w') as f:
+#             f.write(voteventstr)
+#         f.close()
+#         print('saved at ', file_path)
+
+
+if __name__ == '__main__':
+    main()
+
 
 
 if __name__ == '__main__':
