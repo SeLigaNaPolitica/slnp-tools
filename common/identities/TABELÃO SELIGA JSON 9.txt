@@ -1,0 +1,136 @@
+{
+  "info": {
+    "type": "PersonIdentification",
+    "datePub": "22/06/2018",
+    "version": "1.0"
+  },
+  "data": {
+    "person": [
+      [
+        {
+          "property_id": "seliga_uri",
+          "value": "http://purl.org/slnp/data/1234567890987654321",
+          "prov_id": "prov01"
+        },
+        {
+          "property_id": "cpf",
+          "value": "11111111111",
+          "prov_id": "prov01"
+        },
+        {
+          "property_id": "numDeputadoCamara",
+          "value": "123456",
+          "prov_id": "prov02"
+        },
+        {
+          "property_id": "nome",
+          "value": "Heleno de Freitas",
+          "prov_id": "prov03"
+        },
+        {
+          "property_id": "dataNascimento",
+          "value": "02/07/1981",
+          "prov_id": "prov04"
+        }
+      ],
+      [
+        {
+          "property_id": "seliga_uri",
+          "value": "http://purl.org/slnp/data/9876543210123456789",
+          "prov_id": "prov01"
+        },
+        {
+          "property_id": "cpf",
+          "value": "22222222222",
+          "prov_id": "prov01"
+        },
+        {
+          "property_id": "numDeputadoCamara",
+          "value": "987654",
+          "prov_id": "prov02"
+        },
+        {
+          "property_id": "nome",
+          "value": "José de Tal",
+          "prov_id": "prov03"
+        },
+        {
+          "property_id": "dataNascimento",
+          "value": "01/01/1970",
+          "prov_id": "prov4"
+        }
+      ]
+    ],
+    "prov": [
+      {
+        "_id": "prov01",
+        "wasAttributedTo": {
+          "name": "Guilherme"
+        },
+        "generatedAtTime": "2012-10-26T12:45:00Z",
+        "description_uri": "http://..."
+      },
+      {
+        "_id": "prov02",
+        "wasAttributedTo": {
+          "name": "Antônio"
+        },
+        "generatedAtTime": "2012-10-26T12:45:00Z",
+        "description_uri": "http://..."
+      },
+      {
+        "_id": "prov03",
+        "wasAttributedTo": {
+          "name": "Daniel"
+        },
+        "generatedAtTime": "2012-10-26T12:45:00Z",
+        "description_uri": "http://..."
+      },
+      {
+        "_id": "prov04",
+        "wasAttributedTo": {
+          "name": "Laufer"
+        },
+        "generatedAtTime": "2012-10-26T12:45:00Z",
+        "description_uri": "http://..."
+      }
+    ],
+    "property": [
+      {
+        "_id": "seliga_uri",
+        "label": "Se Liga na Política",
+        "functional": "yes",
+        "description": "blablabla",
+        "descritption_uri": "http://purl.org/slnp/ontologies/agent.owl"
+      },
+      {
+        "_id": "cpf",
+        "label": "Cadastro de Pessoa Física",
+        "functional": "yes",
+        "description": "blablabla",
+        "descritption_uri": "http://..."
+      },
+      {
+        "_id": "numDeputadoCamara",
+        "label": "Número de cadastro de deputado na Câmara",
+        "functional": "yes",
+        "description": "blablabla",
+        "descritption_uri": "http://..."
+      },
+      {
+        "_id": "nome",
+        "label": "Nome civil",
+        "functional": "no",
+        "description": "blablabla",
+        "descritption_uri": "http://..."
+      },
+      {
+        "_id": "dataNascimento",
+        "label": "Data de nascimento",
+        "functional": "no",
+        "description": "blablabla",
+        "descritption_uri": "http://..."
+      }
+    ]
+  }
+}
