@@ -1,1 +1,1 @@
-from .uri_generators import person_uri, formaleducation_uri
+from .mappings import get_agents_mapping, get_education_mapping, get_parties_mapping
