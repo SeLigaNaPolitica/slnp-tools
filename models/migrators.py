@@ -41,7 +41,7 @@ TURTLE_TARGET_DIR = '{:}turtle/outputs/'.format(CONGRESSMEN_DIR)
 AGENTS_DIR = 'agents/'
 
 
-class CamaraMigrator(object):
+class TurtleMigrator(object):
     '''
         Provides migration utilities in order to convert previous 
             migration schemes into new objects
@@ -294,4 +294,4 @@ def make_post_membership_party_mapping_dict():
 
 
 if __name__ == '__main__':
-    CamaraMigrator().migrate(TURTLE_SOURCE_DIR)
+    TurtleMigrator().migrate(TURTLE_SOURCE_DIR)
