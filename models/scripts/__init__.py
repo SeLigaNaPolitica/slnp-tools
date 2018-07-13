@@ -1,0 +1,1 @@
+from .mappings import get_agents_mapping, get_education_mapping, get_parties_mapping
