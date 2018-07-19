@@ -2,7 +2,7 @@
 
 Se Liga na Politica resources
 
-## 2. The Project
+## The Project
 
 
 ```

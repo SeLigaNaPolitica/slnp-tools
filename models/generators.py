@@ -47,7 +47,7 @@ class PersonGenerator(object):
             * camara
             * senado
         '''
-        source_path = 'agents/agents.csv'
+        source_path = 'common/agents/agents.csv'
         df = pd.read_csv(source_path, sep=';', index_col=0).fillna('N/A')
         self.agents_dict = df.to_dict('index')
 
@@ -71,7 +71,7 @@ class PersonGenerator(object):
         prov_set = {'slnp'}
 
         if sample_size:
-            keys = sample(list(self.agents_dict), 3)
+            keys = sample(list(self.agents_dict), sample_size)
             agents_dict_ = {key: self.agents_dict[key] for key in keys}
         else:
             agents_dict_ = self.agents_dict
@@ -97,7 +97,7 @@ class PersonGenerator(object):
                         'prov_id': this_prov
                     })
 
-            data_dict['person'].append(person_list)
+            data_dict['person'].append({'identity': person_list})
 
         data_dict['prov'].append({
             '_id': this_prov,
